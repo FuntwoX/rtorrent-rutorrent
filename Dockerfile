@@ -1,4 +1,5 @@
 FROM ubuntu:trusty
+MAINTAINER https://github.com/cloneMe
 USER root
 
 # add extra sources 
@@ -9,8 +10,6 @@ RUN apt-get update && \
     apt-get install -y --force-yes rtorrent unzip unrar mediainfo curl php5-fpm php5-cli php5-geoip nginx wget ffmpeg supervisor && \
     rm -rf /var/lib/apt/lists/*
 
-# configure nginx
-ADD rutorrent-*.nginx /root/
 
 # download rutorrent
 RUN mkdir -p /var/www && \
@@ -19,18 +18,18 @@ RUN mkdir -p /var/www && \
     mv ruTorrent-master /var/www/rutorrent && \
     rm ruTorrent-3.7.zip
 ADD ./config.php /var/www/rutorrent/conf/
+ADD ./rules-htpasswd /.htpasswd
 
 # add startup scripts and configs
-ADD startup-rtorrent.sh startup-nginx.sh startup-php.sh .rtorrent.rc /root/
+ADD startup-nginx.sh startup-php.sh /root/
 
-# configure supervisor
-ADD supervisord.conf /etc/supervisor/conf.d/
+RUN groupadd share
 
-EXPOSE 80
-EXPOSE 443
-EXPOSE 49160
-EXPOSE 49161
-VOLUME /downloads
+COPY createUsersAndStart.sh /
+COPY template/* /template/
 
-CMD ["supervisord"]
+ENV USE_SSL=false
+VOLUME /downloads /ssl
 
+RUN chmod +x createUsersAndStart.sh /root/startup-nginx.sh /root/startup-php.sh
+CMD ["/createUsersAndStart.sh", ".htpasswd"]
