@@ -14,7 +14,7 @@ scgi_port=5001
 while IFS='' read -r line || [[ -n "$line" ]]; do
     #echo "Text read from file: $line"
     IFS=':' read -r userName string <<< "$line"
-    mkdir -p /home/$userName
+    mkdir -p /home/$userName/torrents/misc
 	mkdir -p /var/www/rutorrent/conf/users/$userName
     userUp=$(echo "$userName" | tr '[:lower:]' '[:upper:]')
 
