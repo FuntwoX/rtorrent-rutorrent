@@ -16,6 +16,8 @@ mkdir -p /downloads/rtorrent/#user#/torrents/films_cp
 mkdir -p /downloads/rtorrent/#user#/torrents/series_sr
 mkdir -p /downloads/rtorrent/#user#/torrents/software
 mkdir -p /downloads/rtorrent/#user#/torrents/ebooks
+mkdir -p /downloads/rtorrent/#user#/torrents/musics
+mkdir -p /downloads/rtorrent/#user#/torrents/games
 
 rm -f /downloads/rtorrent/#user#/.rtorrent.rc
 ln -s /home/#user#/.rtorrent.rc /downloads/rtorrent/#user#/
