@@ -13,7 +13,7 @@ RUN apt-get update && \
 
 # download rutorrent
 RUN mkdir -p /var/www && \
-    wget --no-check-certificate https://bintray.com/artifact/download/novik65/generic/ruTorrent-3.7.zip && \
+    wget --no-check-certificate https://github.com/Novik/ruTorrent/tarball/master && \
     unzip ruTorrent-3.7.zip && \
     mv ruTorrent-master /var/www/rutorrent && \
     rm ruTorrent-3.7.zip
