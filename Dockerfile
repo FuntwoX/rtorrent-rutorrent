@@ -7,16 +7,16 @@ ADD ./extra.list /etc/apt/sources.list.d/extra.list
 
 # install
 RUN apt-get update && \
-    apt-get install -y --force-yes rtorrent unzip unrar mediainfo curl php5-fpm php5-cli php5-geoip nginx wget ffmpeg supervisor && \
+    apt-get install -y --force-yes git-core rtorrent unzip unrar mediainfo curl php5-fpm php5-cli php5-geoip nginx wget ffmpeg supervisor && \
     rm -rf /var/lib/apt/lists/*
 
 
 # download rutorrent
 RUN mkdir -p /var/www && \
-    wget --no-check-certificate https://github.com/Novik/ruTorrent/tarball/master && \
-    unzip ruTorrent-3.7.zip && \
-    mv ruTorrent-master /var/www/rutorrent && \
-    rm ruTorrent-3.7.zip
+    git clone --depth=1 \
+       https://github.com/Novik/ruTorrent.git \
+       /var/www/rutorrent
+
 ADD ./config.php /var/www/rutorrent/conf/
 ADD ./rules-htpasswd /.htpasswd
 
