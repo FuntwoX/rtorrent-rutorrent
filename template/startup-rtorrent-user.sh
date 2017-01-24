@@ -11,8 +11,6 @@ mkdir -p /config/rtorrent/#user#/session
 mkdir -p /downloads/rtorrent/#user#/watch
 mkdir -p /downloads/rtorrent/#user#/plex/movies
 mkdir -p /downloads/rtorrent/#user#/plex/series
-mkdir -p /downloads/rtorrent/#user#/incomplete/sickrage
-mkdir -p /downloads/rtorrent/#user#/incomplete/couchpotato
 mkdir -p /downloads/rtorrent/#user#/complete/sickrage
 mkdir -p /downloads/rtorrent/#user#/complete/couchpotato
 mkdir -p /downloads/rtorrent/#user#/torrents/misc
