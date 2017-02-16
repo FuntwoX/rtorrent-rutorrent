@@ -4,3 +4,7 @@ priority=2
 command=/root/startup-rtorrent-#user#.sh
 redirect_stderr=true
 stdout_logfile=/log/app/rtorrent-#user#.log
+
+[program:CronJob]
+command=/usr/sbin/crond -f -d 8
+user=root
