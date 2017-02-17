@@ -20,13 +20,7 @@ while IFS='' read -r line || [[ -n "$line" ]]; do
 
      dht_port2=$[$dht_port+1]
      sed -e "s/#user#/$userName/g" /template/startup-rtorrent-user.sh > /root/startup-rtorrent-$userName.sh
-     chmod +x /root/startup-rtorrent-$userName.sh
-
-     #for postprocessing
-     sed -e "s/#user#/$userName/g" /template/sync-clean-files-user.sh > /root/sync-clean-files-$userName.sh
-     chmod +x /root/sync-clean-files-$userName.sh
-     crontab -l | { cat; echo "*/1     *       *       *       *       /root/sync-clean-files-$userName.sh"; } | crontab -
-
+	 chmod +x /root/startup-rtorrent-$userName.sh
      sed -e "s/#user#/$userName/g" -e "s/#userScgi#/$scgi_port/g" -e "s/#userDht#/$dht_port/g" -e "s/#userDht2#/$dht_port2/g" /template/.rtorrent.rc.tmpl > /home/$userName/.rtorrent.rc
      sed -e "s/#user#/$userName/g" -e "s/#userScgi#/$scgi_port/g" -e "s/#userDht#/$dht_port/g" -e "s/#userDht2#/$dht_port2/g" -e "s/#userUpper#/$userUp/g" /template/config.php.tmpl > /var/www/rutorrent/conf/users/$userName/config.php
      cp /template/plugins.ini /var/www/rutorrent/conf/users/$userName/
