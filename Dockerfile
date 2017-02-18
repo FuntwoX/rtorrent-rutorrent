@@ -15,7 +15,10 @@ RUN apt-get update && \
 RUN mkdir -p /var/www && \
     git clone --depth=1 \
        https://github.com/Novik/ruTorrent.git \
-       /var/www/rutorrent
+       /var/www/rutorrent && \
+    git clone \
+       https://github.com/QuickBox/club-QuickBox.git \
+       /var/www/rutorrent/plugins/theme/themes/club-QuickBox 
 
 ADD ./config.php /var/www/rutorrent/conf/
 ADD ./rules-htpasswd /.htpasswd
@@ -32,4 +35,5 @@ ENV USE_SSL=false
 VOLUME /downloads /ssl
 
 RUN chmod +x createUsersAndStart.sh /root/startup-nginx.sh /root/startup-php.sh
+
 CMD ["/createUsersAndStart.sh", ".htpasswd"]
