@@ -1,5 +1,5 @@
 FROM ubuntu:trusty
-MAINTAINER https://github.com/cloneMe
+MAINTAINER <https://github.com/FuntwoX>
 USER root
 
 # add extra sources 
